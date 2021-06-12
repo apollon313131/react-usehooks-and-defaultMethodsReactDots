@@ -15,7 +15,7 @@ function App() {
         <Count id={1} value={count1} />
       </div>
 
-      <h5>Счетчик 2:</h5>
+      <h5>Счетчик 2: </h5>
       <div className='counter'>
         <button onClick={() => setCount2(count2 + 1)}>+</button>
         <Count id={2} value={count2} />
