@@ -1,9 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 const List = () => {
+
+    const timerRef = useRef();
     const ulRef = useRef();
-    const [numbers, setNumbers] = useState([1, 2, 3]);
+    const [numbers, setNumbers] = useState([1, 2, 3, 4, 5]);
     const [count, setcount] = useState(0);
+
     const addNumber = () => {
         const randNumber = Math.round(Math.random() * 10)
         const newArr = [...numbers, randNumber]
@@ -14,12 +17,28 @@ const List = () => {
         if (numbers.length === 0) {
             setNumbers(prev => [...prev, 1])
         }
-        setNumbers(prev => [...prev, prev[prev.length - 1] + 1])
+        setNumbers((prev) => [...prev, prev[prev.length - 1] + 1]);
     }
 
     const clearNumbers = () => {
         setNumbers([]) //TODO сбросить
     }
+
+    const handleScroll = useCallback(() => {
+        console.log('Был скролл');
+    }, []);
+
+    const removeScroll = () => {
+        ulRef.current.removeEventListener('scroll', handleScroll);
+    };
+
+    const startInterval = () => {
+        timerRef.current = setInterval(addNumber, 1000);
+    };
+
+    const stopInterval = () => {
+        clearInterval(timerRef.current);
+    };
 
     useEffect(() => {
         console.log('Список чисел был обновлен');
@@ -28,17 +47,11 @@ const List = () => {
         }
     }, [numbers, count]); //TODO если пустой массив [] - это ComponentDidMount() не следим за переменными, рендер 1 раз, если не передавать ничего - значит, что useEffect будет выполнять каждый раз(перерендер или обновление)
 
-    const handleScroll = () => {
-        console.log('Был скролл');
-    };
 
     useEffect(() => {
         ulRef.current.addEventListener('scroll', handleScroll);
     }, []);
 
-    const removeScroll = useCallback(() => {
-        ulRef.current.removeEventListener('scroll', handleScroll);
-    }, []);
 
     return (
         <>
@@ -58,6 +71,8 @@ const List = () => {
                 <button onClick={addNextNumber}>+1</button>
                 <button onClick={clearNumbers}>Очистить</button>
                 <button onClick={removeScroll}>Не следить</button>
+                <button onClick={startInterval}> СТАРТ </button>
+                <button onClick={stopInterval}> СТОП </button>
             </div>
         </>
     );
@@ -65,7 +80,16 @@ const List = () => {
 
 export default List
 
+// let timer;
 
+
+    // const startInterval = () => {
+    //     timerRef.current = setInterval(addNumber, 1000);
+    // };
+
+    // const stopInterval = () => {
+    //     clearInterval(timerRef.current);
+    // };
 
 // class List extends React.Component {
 //     state = {
