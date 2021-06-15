@@ -39,10 +39,26 @@
 
 ul {
     margin-bottom: 10px;
+    height: 100px;
+    width: 30%;
+    overflow: auto;
 }
 
 ul li {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding: 5px;
     list-style-type: none;
+}
+
+.ulList {
+    display: flex;
+    justify-content: center;
+}
+
+.ulButton {
+    margin: 5px;
+}
+
+.ulButton button {
+    margin: 5px;
 }
