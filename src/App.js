@@ -1,18 +1,24 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import Count from './components/Count'
 import IsFive from './components/IsFive'
 import List from './components/List'
+import Buttons from './components/Buttons'
 
 function App() {
   const [count1, setCount1] = useState(0);
   const [count2, setCount2] = useState(0);
+  const [count3, setCount3] = useState(0);
   // let numbers = [1, 2, 3]
   const [visibleList, setvisibleList] = useState(true)
 
   const toggleVisibleList = () => {
     setvisibleList((visible) => !visible);
   }
+
+  // TODO useCallback 
+  const onPlus = useCallback(() => setCount3((count3) => count3 + 1), []);
+  const onMinus = useCallback(() => setCount3((count3) => count3 - 1), []);
 
   return (
     <div className='App'>
@@ -37,6 +43,11 @@ function App() {
         </div>
       </div>
       <hr />
+      <div className='mBot'>
+        <h1>UseCallback</h1>
+        <h1>{count3}</h1>
+        <Buttons onPlus={onPlus} onMinus={onMinus} />
+      </div>
     </div>
   );
 }

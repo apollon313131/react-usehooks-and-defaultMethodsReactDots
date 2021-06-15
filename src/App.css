@@ -39,7 +39,9 @@
 
 ul {
     margin-bottom: 10px;
-    height: 100px;
+    margin-left: 0;
+    padding-left: 0;
+    height: 150px;
     width: 30%;
     overflow: auto;
 }
@@ -61,4 +63,8 @@ ul li {
 
 .ulButton button {
     margin: 5px;
+}
+
+.mBot {
+    margin-bottom: 150px;
 }
